@@ -62,6 +62,8 @@ int Where(int, char* [])
   compare(__LINE__, where(bar.gamma), " WHERE tab_bar.gamma");
   compare(__LINE__, where(bar.gamma == false), " WHERE (tab_bar.gamma=" + getFalse() + ")");
   compare(__LINE__, where(bar.beta == "SQL"), " WHERE (tab_bar.beta='SQL')");
-
+  
+  // Fulltext
+  compare(__LINE__, where(bar.beta.match("Geneviève \'")), " WHERE MATCH(tab_bar.beta) AGAINST ('Geneviève ''' IN NATURAL LANGUAGE MODE)");
   return 0;
 }

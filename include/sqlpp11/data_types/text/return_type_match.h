@@ -1,5 +1,6 @@
 /*
- * Copyright (c) 2013-2015, Roland Bock
+ * Copyright (c) 2013-2017, Roland Bock
+ * Copyright (c) 2018, Coloridad Ltd. 
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
@@ -24,20 +25,21 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef SQLPP11_DATA_TYPES_TEXT_H
-#define SQLPP11_DATA_TYPES_TEXT_H
+#ifndef SQLPP_RETURN_TYPE_MATCH_H
+#define SQLPP_RETURN_TYPE_MATCH_H
 
-#include <sqlpp11/data_types/text/data_type.h>
-#include <sqlpp11/data_types/text/operand.h>
-#include <sqlpp11/data_types/text/wrap_operand.h>
-#include <sqlpp11/data_types/text/expression_operators.h>
-#include <sqlpp11/data_types/text/column_operators.h>
-#include <sqlpp11/data_types/text/parameter_value.h>
-#include <sqlpp11/data_types/text/result_field.h>
+#include <sqlpp11/bad_expression.h>
 
-// text specific functions
-#include <sqlpp11/data_types/text/like.h>
-#include <sqlpp11/data_types/text/concat.h>
-#include <sqlpp11/data_types/text/match.h>
+namespace sqlpp
+{
+  template <typename T, typename Defer, typename Enable = void>
+  struct return_type_match
+  {
+    using check = assert_valid_operands;
+    using type = bad_expression<boolean>;
+  };
+  template <typename T, typename Defer>
+  using return_type_match_t = typename return_type_match<T, Defer>::type;
+}  // namespace sqlpp
 
 #endif
