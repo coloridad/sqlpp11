@@ -1,5 +1,6 @@
 /*
- * Copyright (c) 2013-2017, Roland Bock, Aaron Bishop
+ * Copyright (c) 2013-2015, Roland Bock
+ * Copyright (c) 2018, Coloridad Ltd. 
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
@@ -24,19 +25,21 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef SQLPP11_DATA_TYPES_H
-#define SQLPP11_DATA_TYPES_H
+#ifndef SQLPP11_DATA_TYPES_GEOPOINT_DATA_TYPE_H
+#define SQLPP11_DATA_TYPES_GEOPOINT_DATA_TYPE_H
 
-#include <sqlpp11/data_types/blob.h>
-#include <sqlpp11/data_types/boolean.h>
-#include <sqlpp11/data_types/integral.h>
-#include <sqlpp11/data_types/unsigned_integral.h>
-#include <sqlpp11/data_types/floating_point.h>
-#include <sqlpp11/data_types/text.h>
-#include <sqlpp11/data_types/day_point.h>
-#include <sqlpp11/data_types/time_of_day.h>
-#include <sqlpp11/data_types/time_point.h>
-#include <sqlpp11/data_types/no_value.h>
-#include <sqlpp11/data_types/geopoint.h>
+#include <sqlpp11/type_traits.h>
+#include <sqlpp11/data_types/geopoint/coordinate.h>
 
+namespace sqlpp
+{
+  struct geopoint
+  {
+    using _traits = make_traits<geopoint, tag::is_value_type>;
+    using _cpp_value_type = coordinate;
+
+    template <typename T>
+    using _is_valid_operand = is_geopoint_t<T>;
+  };
+}  // namespace sqlpp
 #endif

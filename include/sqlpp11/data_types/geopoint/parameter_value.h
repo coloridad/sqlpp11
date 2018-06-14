@@ -1,5 +1,6 @@
 /*
- * Copyright (c) 2013-2017, Roland Bock, Aaron Bishop
+ * Copyright (c) 2013-2015, Roland Bock
+ * Copyright (c) 2018, Coloridad Ltd. 
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
@@ -24,19 +25,28 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef SQLPP11_DATA_TYPES_H
-#define SQLPP11_DATA_TYPES_H
+#ifndef SQLPP11_DATA_TYPES_GEOPOINT_PARAMETER_VALUE_H
+#define SQLPP11_DATA_TYPES_GEOPOINT_PARAMETER_VALUE_H
 
-#include <sqlpp11/data_types/blob.h>
-#include <sqlpp11/data_types/boolean.h>
-#include <sqlpp11/data_types/integral.h>
-#include <sqlpp11/data_types/unsigned_integral.h>
-#include <sqlpp11/data_types/floating_point.h>
-#include <sqlpp11/data_types/text.h>
-#include <sqlpp11/data_types/day_point.h>
-#include <sqlpp11/data_types/time_of_day.h>
-#include <sqlpp11/data_types/time_point.h>
-#include <sqlpp11/data_types/no_value.h>
-#include <sqlpp11/data_types/geopoint.h>
+#include <sqlpp11/data_types/parameter_value.h>
+#include <sqlpp11/data_types/parameter_value_base.h>
+#include <sqlpp11/data_types/geopoint/data_type.h>
+#include <sqlpp11/tvin.h>
 
+namespace sqlpp
+{
+  template <>
+  struct parameter_value_t<geopoint> : public parameter_value_base<geopoint>
+  {
+    using base = parameter_value_base<geopoint>;
+    using base::base;
+    using base::operator=;
+
+    template <typename Target>
+    void _bind(Target& target, size_t index) const
+    {
+      target._bind_geopoint_parameter(index, &_value, _is_null);
+    }
+  };
+}  // namespace sqlpp
 #endif

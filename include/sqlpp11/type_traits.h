@@ -99,6 +99,10 @@ namespace sqlpp
   template <typename T>
   using is_time_point_t = std::is_same<value_type_of<T>, time_point>;
 
+  struct geopoint;
+  template <typename T>
+  using is_geopoint_t = std::is_same<value_type_of<T>, geopoint>;
+
   // joined data type
   template <typename T>
   using is_numeric_t =

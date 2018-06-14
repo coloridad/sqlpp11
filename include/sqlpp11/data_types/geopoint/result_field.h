@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013-2017, Roland Bock, Aaron Bishop
+ * Copyright (c) 2013-2015, Roland Bock
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
@@ -24,19 +24,32 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef SQLPP11_DATA_TYPES_H
-#define SQLPP11_DATA_TYPES_H
+#ifndef SQLPP11_DATA_TYPES_GEOPOINT_RESULT_FIELD_H
+#define SQLPP11_DATA_TYPES_GEOPOINT_RESULT_FIELD_H
 
-#include <sqlpp11/data_types/blob.h>
-#include <sqlpp11/data_types/boolean.h>
-#include <sqlpp11/data_types/integral.h>
-#include <sqlpp11/data_types/unsigned_integral.h>
-#include <sqlpp11/data_types/floating_point.h>
-#include <sqlpp11/data_types/text.h>
-#include <sqlpp11/data_types/day_point.h>
-#include <sqlpp11/data_types/time_of_day.h>
-#include <sqlpp11/data_types/time_point.h>
-#include <sqlpp11/data_types/no_value.h>
-#include <sqlpp11/data_types/geopoint.h>
+#include <sqlpp11/basic_expression_operators.h>
+#include <sqlpp11/result_field.h>
+#include <sqlpp11/result_field_base.h>
+#include <sqlpp11/data_types/geopoint/data_type.h>
+#include <sqlpp11/field_spec.h>
 
+namespace sqlpp
+{
+  template <typename Db, typename NameType, bool CanBeNull, bool NullIsTrivialValue>
+  struct result_field_t<Db, field_spec_t<NameType, geopoint, CanBeNull, NullIsTrivialValue>>
+      : public result_field_base<Db, field_spec_t<NameType, geopoint, CanBeNull, NullIsTrivialValue>>
+  {
+    template <typename Target>
+    void _bind(Target& target, size_t index)
+    {
+      target._bind_geopoint_result(index, &this->_value, &this->_is_null);
+    }
+
+    template <typename Target>
+    void _post_bind(Target& target, size_t index)
+    {
+      target._post_bind_geopoint_result(index, &this->_value, &this->_is_null);
+    }
+  };
+}  // namespace sqlpp
 #endif
