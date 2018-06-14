@@ -205,7 +205,9 @@ ddlConstraint = Or([
         ddlWord("KEY"),
         ddlWord("INDEX"),
         ddlWord("UNIQUE"),
-        ddlWord("CHECK")
+        ddlWord("CHECK"),
+        ddlWord("FULLTEXT KEY"),
+        ddlWord("SPATIAL INDEX")
         ])
 ddlColumn = Group(Optional(ddlConstraint).setResultsName("isConstraint") + OneOrMore(MatchFirst([ddlUnsigned, ddlNotNull, ddlAutoValue, ddlDefaultValue, ddlFunctionWord("NOW"), ddlTerm, ddlNum, ddlColumnComment, ddlString, ddlArguments, ddlMathCond])))
 ddlIfNotExists = Optional(Group(ddlWord("IF") + ddlWord("NOT") + ddlWord("EXISTS")).setResultsName("ifNotExists"))
@@ -263,7 +265,8 @@ types = {
     'smallint unsigned': 'smallint_unsigned', #MYSQL
     'integer unsigned': 'integer_unsigned', #MYSQL
     'int unsigned': 'integer_unsigned', #MYSQL
-    'bigint unsigned': 'bigint_unsigned', #MYSQL
+    'bigint unsigned': 'bigint_unsigned',  #MYSQL
+    'point': 'geopoint' #MYSQL
     }
 
 if failOnParse:
