@@ -76,11 +76,11 @@ namespace sqlpp
 
     static Context& _(const Operand& t, Context& context)
     {
-      context << "POINT ";
+      context << "GeomFromText('POINT(";
       context << t._t.latitude;
-      context << ",";
-      context << t._t.longitude;
       context << " ";
+      context << t._t.longitude;
+      context << ")')";
       return context;
     }
   };

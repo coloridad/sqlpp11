@@ -350,5 +350,69 @@ namespace test
       };
     };
   };
+
+  namespace TabCoords_
+  {
+    struct Coordinates
+    {
+      struct _alias_t
+      {
+        static constexpr const char _literal[] =  "coordinates";
+        using _name_t = sqlpp::make_char_sequence<sizeof(_literal), _literal>;
+        template<typename T>
+        struct _member_t
+          {
+            T coordinates;
+            T& operator()() { return coordinates; }
+            const T& operator()() const { return coordinates; }
+          };
+      };
+      using _traits = sqlpp::make_traits<sqlpp::geopoint, sqlpp::tag::can_be_null>;
+    };
+    struct Delta
+    {
+      struct _alias_t
+      {
+        static constexpr const char _literal[] = "delta";
+        using _name_t = sqlpp::make_char_sequence<sizeof(_literal), _literal>;
+        template <typename T>
+        struct _member_t
+        {
+          T delta;
+          T& operator()()
+          {
+            return delta;
+          }
+          const T& operator()() const
+          {
+            return delta;
+          }
+        };
+      };
+      using _traits = sqlpp::make_traits<sqlpp::integer, sqlpp::tag::can_be_null>;
+    };
+  };
+  struct TabCoords
+      : sqlpp::table_t<TabCoords, TabCoords_::Coordinates, TabCoords_::Delta>
+  {
+    struct _alias_t
+    {
+      static constexpr const char _literal[] = "tab_coords";
+      using _name_t = sqlpp::make_char_sequence<sizeof(_literal), _literal>;
+      template <typename T>
+      struct _member_t
+      {
+        T tabDateTime;
+        T& operator()()
+        {
+          return tabDateTime;
+        }
+        const T& operator()() const
+        {
+          return tabDateTime;
+        }
+      };
+    };
+  };
 }  // namespace test
 #endif

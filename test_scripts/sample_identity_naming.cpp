@@ -1,4 +1,5 @@
 #include <sample_identity_naming.h>
+#include <sqlpp11/data_types/geopoint.h>
 
 int main()
 {
@@ -12,4 +13,5 @@ int main()
   tab_bar.beta = "beta";
   tab_bar.gamma = true;
   tab_bar.delta = 42;
+  tab_bar.coordinates = coordinate();
 }
