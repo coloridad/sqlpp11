@@ -32,6 +32,7 @@
 #include <sqlpp11/alias_operators.h>
 #include <sqlpp11/serializer.h>
 #include <sqlpp11/data_types/geopoint/coordinate.h>
+#include <cmath>
 
 namespace sqlpp
 {
@@ -62,7 +63,7 @@ namespace sqlpp
 
     bool _is_trivial() const
     {
-      return abs(_t.latitude) < 0.001 && abs(_t.longitude) < 0.001;
+      return fabs(_t.latitude) < 0.001 && fabs(_t.longitude) < 0.001;
     }
 
     _value_t _t;
