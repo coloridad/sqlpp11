@@ -57,6 +57,7 @@ find_file(HinnantDate_INCLUDE_FILE
     HINTS
       ${HinnantDate_ROOT_DIR}
       ${HinnantDate_ROOT_DIR}/include
+      ${CMAKE_CURRENT_SOURCE_DIR}/../date/include
 )
 mark_as_advanced(HinnantDate_INCLUDE_FILE)
 
