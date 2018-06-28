@@ -29,14 +29,14 @@
 #define SQLPP11_DATA_TYPES_GEOPOINT_DATA_TYPE_H
 
 #include <sqlpp11/type_traits.h>
-#include <sqlpp11/data_types/geopoint/coordinate.h>
+#include <sqlpp11/coordinate.h>
 
 namespace sqlpp
 {
   struct geopoint
   {
     using _traits = make_traits<geopoint, tag::is_value_type>;
-    using _cpp_value_type = coordinate;
+    using _cpp_value_type = ::sqlpp::coordinate;
 
     template <typename T>
     using _is_valid_operand = is_geopoint_t<T>;

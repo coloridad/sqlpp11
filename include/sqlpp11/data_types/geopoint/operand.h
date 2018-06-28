@@ -31,7 +31,7 @@
 #include <sqlpp11/type_traits.h>
 #include <sqlpp11/alias_operators.h>
 #include <sqlpp11/serializer.h>
-#include <sqlpp11/data_types/geopoint/coordinate.h>
+#include <sqlpp11/coordinate.h>
 #include <cmath>
 
 namespace sqlpp

@@ -35,6 +35,6 @@
 #include <sqlpp11/data_types/geopoint/column_operators.h>
 #include <sqlpp11/data_types/geopoint/parameter_value.h>
 #include <sqlpp11/data_types/geopoint/result_field.h>
-#include <sqlpp11/data_types/geopoint/coordinate.h>
+#include <sqlpp11/coordinate.h>
 
 #endif

@@ -29,7 +29,7 @@
 
 #include <utility>
 #include <sqlpp11/wrap_operand.h>
-#include <sqlpp11/data_types/geopoint/coordinate.h>
+#include <sqlpp11/coordinate.h>
 
 namespace sqlpp
 {
