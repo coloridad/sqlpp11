@@ -26,17 +26,19 @@
 
 #ifndef SQLPP11_DATA_TYPES_GEOPOINT_COORDINATE_H
 #define SQLPP11_DATA_TYPES_GEOPOINT_COORDINATE_H
+#include <cmath>
 
 namespace sqlpp
 {
   struct coordinate
   {
-    double latitude;
-    double longitude;
+    double latitude = 0;
+    double longitude = 0;
 
     bool operator==(const coordinate value)
     {
-      return true;
+      return fabs(value.latitude - latitude) < std::numeric_limits<double>::epsilon() &&
+          fabs(value.longitude - longitude) < std::numeric_limits<double>::epsilon();
     }
   };
 }

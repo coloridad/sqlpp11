@@ -13,5 +13,5 @@ int main()
   tab_bar.beta = "beta";
   tab_bar.gamma = true;
   tab_bar.delta = 42;
-  tab_bar.coordinates = coordinate();
+  tab_bar.coordinates = sqlpp::coordinate();
 }
