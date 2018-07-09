@@ -34,7 +34,7 @@
 int Geopoint(int, char*[])
 {
   const auto tab = test::TabCoords{};
-  const auto coords = coordinate();
+  const auto coords = sqlpp::coordinate();
 
   compare(__LINE__, insert_into(tab).set(tab.coordinates = coords, tab.delta = 3),
           "INSERT INTO tab_coords (coordinates,delta) VALUES(GeomFromText('POINT(0 0)'),3)");
