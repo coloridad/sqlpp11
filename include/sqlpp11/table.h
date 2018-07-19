@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2013-2015, Roland Bock
+ * Copyright (c) 2018, Coloridad Ltd.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
@@ -61,6 +62,14 @@ namespace sqlpp
     template <typename AliasProvider>
     using _alias_t = table_alias_t<AliasProvider, Table, ColumnSpec...>;
 
+    std::string _forced_index;
+
+    auto force_index(const std::string forced_index) //const -> decltype(::sqlpp::join(std::declval<Table>(), t))
+    {
+      _forced_index = (std::string)forced_index;
+      return *this;
+    }
+
     template <typename T>
     auto join(T t) const -> decltype(::sqlpp::join(std::declval<Table>(), t))
     {
@@ -118,9 +127,13 @@ namespace sqlpp
     using _serialize_check = consistent_t;
     using T = X;
 
-    static Context& _(const T& /*unused*/, Context& context)
+    static Context& _(const T& t, Context& context)
     {
       context << name_of<T>::template char_ptr<Context>();
+
+      if (t._forced_index.size() > 0) {
+        context << " FORCE INDEX (" << t._forced_index << ") ";
+      }
       return context;
     }
   };
