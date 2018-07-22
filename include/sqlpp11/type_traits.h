@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2013-2017, Roland Bock, Aaron Bishop
+ * Copyright (c) 2018, Coloridad Ltd.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
@@ -386,6 +387,12 @@ namespace sqlpp
   {
     using _nodes = detail::type_vector<>;
     using _contains_aggregate_function = std::true_type;
+  };
+
+  struct string_function
+  {
+    using _nodes = detail::type_vector<>;
+    using _contains_string_function = std::true_type;
   };
 
   template <typename NameProvider, typename Member>

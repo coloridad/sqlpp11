@@ -391,7 +391,8 @@ namespace test
       };
       using _traits = sqlpp::make_traits<sqlpp::integer, sqlpp::tag::can_be_null>;
     };
-  };
+  }
+
   struct TabCoords
       : sqlpp::table_t<TabCoords, TabCoords_::Coordinates, TabCoords_::Delta>
   {
