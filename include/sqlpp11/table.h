@@ -61,13 +61,30 @@ namespace sqlpp
     using _foreign_table_alias_t = table_alias_t<AliasProvider, T, ColumnSpec...>;
     template <typename AliasProvider>
     using _alias_t = table_alias_t<AliasProvider, Table, ColumnSpec...>;
+//
+//    struct _forced_index_t {
+//      const std::string index_name;
+//
+//      _forced_index_t() {}
+//      _forced_index_t(const std::string _index_name) : index_name(_index_name) {}
+//      _forced_index_t(const std::string &_index_name) : index_name(_index_name) {}
+//      _forced_index_t(_forced_index_t &&other) : index_name(std::move(other.index_name)) {}
+//
+//    };
+//
+//    struct _forced_index_t _forced_index;
+//
+//
+//    auto force_index(const std::string forced_index)
+//    {
+//      _forced_index = {forced_index};
+//      //return {*static_cast<const Table*>(this)};
+//      return *this;
+//    }
 
     std::string _forced_index;
-
-    auto force_index(const std::string forced_index) //const -> decltype(::sqlpp::join(std::declval<Table>(), t))
-    {
+    void force_index(const std::string forced_index) {
       _forced_index = (std::string)forced_index;
-      return *this;
     }
 
     template <typename T>
@@ -131,6 +148,9 @@ namespace sqlpp
     {
       context << name_of<T>::template char_ptr<Context>();
 
+//      if (t._forced_index.index_name.size() > 0) {
+//        context << " FORCE INDEX (" << t._forced_index.index_name << ") ";
+//      }
       if (t._forced_index.size() > 0) {
         context << " FORCE INDEX (" << t._forced_index << ") ";
       }
