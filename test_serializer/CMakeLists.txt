@@ -33,6 +33,7 @@ set(test_serializer_names
 	TableAlias
   Where
   Geopoint
+  Functions
   )
 
 create_test_sourcelist(test_serializer_sources test_serializer_main.cpp ${test_serializer_names})

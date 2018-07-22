@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2013-2016, Roland Bock
+ * Copyright (c) 2018, Coloridad Ltd.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
@@ -32,6 +33,7 @@
 #include <sqlpp11/parameter_list.h>
 #include <sqlpp11/data_types.h>
 #include <sqlpp11/aggregate_functions.h>
+#include <sqlpp11/string_functions.h>
 #include <sqlpp11/trim.h>
 #include <sqlpp11/case.h>
 #include <sqlpp11/in.h>
