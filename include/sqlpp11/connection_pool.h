@@ -36,6 +36,7 @@
 #include <type_traits>
 #include <sqlpp11/exception.h>
 #include <sqlpp11/pool_connection.h>
+#include <sqlpp11/mysql/connection_config.h>
 
 namespace sqlpp
 {
@@ -183,7 +184,7 @@ namespace sqlpp
 
       try
       {
-        auto c = std::unique_ptr<Connection>(new Connection(*(config.get())));
+        auto c = std::unique_ptr<Connection>(new Connection(config));
         return pool_connection<Connection_config, Reconnect_policy, Connection>(c, this);
       }
       catch (const sqlpp::exception& e)

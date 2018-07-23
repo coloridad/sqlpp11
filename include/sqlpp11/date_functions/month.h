@@ -27,6 +27,13 @@
 #ifndef SQLPP11_DATE_FUNCTIONS_MONTH_H
 #define SQLPP11_DATE_FUNCTIONS_MONTH_H
 
+#include <sqlpp11/char_sequence.h>
+#include <sqlpp11/data_types/integral/data_type.h>
+#include <sqlpp11/alias_operators.h>
+#include <sqlpp11/serialize.h>
+#include <sqlpp11/wrap_operand.h>
+#include <sqlpp11/data_types/integral/expression_operators.h>
+
 namespace sqlpp
 {
   struct month_alias_t
@@ -64,6 +71,10 @@ namespace sqlpp
 
     using _auto_alias_t = month_alias_t;
 
+    month_t(const Expr expr) : _expr(expr)
+    {
+    }
+
     month_t(const month_t&) = default;
     month_t(month_t&&) = default;
     month_t& operator=(const month_t&) = default;
@@ -92,7 +103,11 @@ namespace sqlpp
   template <typename T>
   auto month(T t) -> month_t<T>
   {
-    static_assert(is_expression_t<wrap_operand<T>>::value, "month() requires an expression as argument");
+    static_assert(is_expression_t<wrap_operand_t<T>>::value, "month() requires an expression as argument");
+    static_assert(is_column_t<wrap_operand_t<T>>::value, "month() requires a column as argument");
+    static_assert(is_day_point_t<wrap_operand_t<T>>::value
+                      or is_time_of_day_t<wrap_operand_t<T>>::value
+                      or is_time_point_t<wrap_operand_t<T>>::value, "month() requires date or datetime value type as argument");
     return {t};
   }
 }

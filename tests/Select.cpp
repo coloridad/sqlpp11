@@ -68,6 +68,7 @@ int Select(int, char* [])
 
   const auto f = test::TabFoo{};
   const auto t = test::TabBar{};
+  const auto d = test::TabDateTime{};
   const auto tab_a = f.as(sqlpp::alias::a);
 
   getColumn(db, t.alpha);
@@ -141,6 +142,11 @@ int Select(int, char* [])
   for (const auto& row : db(sqlpp::select(sqlpp::left(t.beta, 2)).from(t).unconditionally()))
   {
     std::cout << row.left << std::endl;
+  }
+
+  for (const auto& row : db(sqlpp::select(sqlpp::month(d.colDayPoint)).from(d).unconditionally()))
+  {
+    std::cout << row.month << std::endl;
   }
 
   auto stat = sqlpp::select()
