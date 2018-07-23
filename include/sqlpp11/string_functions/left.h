@@ -30,6 +30,9 @@
 
 #include <sqlpp11/char_sequence.h>
 #include <sqlpp11/data_types/text/data_type.h>
+#include <sqlpp11/alias_operators.h>
+#include <sqlpp11/serialize.h>
+#include <sqlpp11/data_types/text/expression_operators.h>
 
 namespace sqlpp
 {
@@ -43,15 +46,15 @@ namespace sqlpp
       template <typename T>
       struct _member_t
       {
-        T text;
+        T left;
         T& operator()()
         {
-          return text;
+          return left;
         }
 
         const T& operator()() const
         {
-          return text;
+          return left;
         }
       };
     };
@@ -91,7 +94,7 @@ namespace sqlpp
     static Context& _(const T& t, Context& context)
     {
       context << "LEFT(";
-      serialize(t._expr, context);
+      sqlpp::serialize(t._expr, context);
       context << ", " << t._len << ")";
 
       return context;
@@ -101,6 +104,10 @@ namespace sqlpp
   template <typename T>
   auto left(T t, unsigned int len) -> left_t<T>
   {
+    static_assert(is_expression_t<wrap_operand_t<T>>::value, "left() requires an expression as argument");
+    static_assert(is_column_t<wrap_operand_t<T>>::value, "left() requires a column as argument");
+    static_assert(is_text_t<wrap_operand_t<T>>::value, "left() requires a text column as argument");
+
     return {t, len};
   }
 }

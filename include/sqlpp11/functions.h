@@ -34,6 +34,7 @@
 #include <sqlpp11/data_types.h>
 #include <sqlpp11/aggregate_functions.h>
 #include <sqlpp11/string_functions.h>
+#include <sqlpp11/date_functions.h>
 #include <sqlpp11/trim.h>
 #include <sqlpp11/case.h>
 #include <sqlpp11/in.h>

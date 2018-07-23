@@ -138,6 +138,11 @@ int Select(int, char* [])
     std::cout << row.count << std::endl;
   }
 
+  for (const auto& row : db(sqlpp::select(sqlpp::left(t.beta, 2)).from(t).unconditionally()))
+  {
+    std::cout << row.left << std::endl;
+  }
+
   auto stat = sqlpp::select()
                   .columns(all_of(t))
                   .flags(sqlpp::all)
