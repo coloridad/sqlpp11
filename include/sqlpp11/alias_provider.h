@@ -32,7 +32,7 @@
 #include <sqlpp11/basic_expression_operators.h>
 
 #define SQLPP_ALIAS_PROVIDER(name)                                           \
-  struct name##_t : sqlpp::basic_expression_operators<name##_t>                     \
+struct name##_t                                                              \
   {                                                                          \
     struct _alias_t                                                          \
     {                                                                        \
@@ -52,6 +52,43 @@
         }                                                                    \
       };                                                                     \
     };                                                                       \
+  };                                                                         \
+  constexpr name##_t name = {};
+#define SQLPP_OPERATOR_SUPPORTED_ALIAS_PROVIDER(name)                        \
+  struct name##_t : sqlpp::basic_expression_operators<name##_t>              \
+  {                                                                          \
+    struct _alias_t                                                          \
+    {                                                                        \
+      static constexpr const char _literal[] = #name;                        \
+      using _name_t = sqlpp::make_char_sequence<sizeof(_literal), _literal>; \
+      template <typename T>                                                  \
+      struct _member_t                                                       \
+      {                                                                      \
+        T name;                                                              \
+        T& operator()()                                                      \
+        {                                                                    \
+          return name;                                                       \
+        }                                                                    \
+        const T& operator()() const                                          \
+        {                                                                    \
+          return name;                                                       \
+        }                                                                    \
+      };                                                                     \
+    };                                                                       \
+  };                                                                         \
+  namespace sqlpp {                                                          \
+  template <typename Context>                                                \
+  struct serializer_t<Context, name##_t>                                     \
+  {                                                                          \
+    using _serialize_check = consistent_t;                                   \
+    using T = name##_t;                                                      \
+                                                                             \
+    static Context& _(const T& /*unused*/, Context& context)                 \
+    {                                                                        \
+      context << name_of<T>::template char_ptr<Context>();                   \
+      return context;                                                        \
+    }                                                                        \
+  };                                                                         \
   };                                                                         \
   constexpr name##_t name = {};
 
