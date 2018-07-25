@@ -24,8 +24,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-#ifndef SQLPP11_DATE_FUNCTIONS_MONTH_H
-#define SQLPP11_DATE_FUNCTIONS_MONTH_H
+#pragma once
 
 #include <sqlpp11/char_sequence.h>
 #include <sqlpp11/data_types/integral/data_type.h>
@@ -111,4 +110,4 @@ namespace sqlpp
     return {t};
   }
 }
-#endif // SQLPP11_DATE_FUNCTIONS_MONTH_H
+

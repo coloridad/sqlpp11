@@ -30,4 +30,6 @@
 #include <sqlpp11/date_functions/week.h>
 #include <sqlpp11/date_functions/month.h>
 #include <sqlpp11/date_functions/year.h>
+#include <sqlpp11/date_functions/date.h>
+
 #endif // SQLPP11_DATE_FUNCTIONS_H
