@@ -27,11 +27,10 @@
 #pragma once
 
 #include <sqlpp11/char_sequence.h>
-#include <sqlpp11/data_types/integral/data_type.h>
 #include <sqlpp11/alias_operators.h>
 #include <sqlpp11/serialize.h>
 #include <sqlpp11/wrap_operand.h>
-#include <sqlpp11/data_types/integral/expression_operators.h>
+#include <sqlpp11/data_types/time_point.h>
 
 namespace sqlpp
 {
@@ -60,10 +59,10 @@ struct date_component_alias_t
 };
 
 template <typename Expr>
-struct date_component_t : public expression_operators<date_component_t<Expr>, integral>,
-                 public alias_operators<date_component_t<Expr>>
+struct date_component_t : public expression_operators<date_component_t<Expr>, time_point>,
+                          public alias_operators<date_component_t<Expr>>
 {
-  using _traits = make_traits<integral, tag::is_expression>;
+  using _traits = make_traits<time_point, tag::is_expression>;
 
   using _nodes = detail::type_vector<Expr, date_function>;
   using _can_be_null = std::true_type;
