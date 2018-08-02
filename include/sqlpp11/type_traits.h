@@ -401,6 +401,12 @@ namespace sqlpp
     using _contains_date_function = std::true_type;
   };
 
+  struct hour_function
+  {
+    using _nodes = detail::type_vector<>;
+    using _contains_hour_function = std::true_type;
+  };
+
   template <typename NameProvider, typename Member>
   using member_t = typename NameProvider::_alias_t::template _member_t<Member>;
 

@@ -31,5 +31,5 @@
 #include <sqlpp11/date_functions/month.h>
 #include <sqlpp11/date_functions/year.h>
 #include <sqlpp11/date_functions/date.h>
-
+#include <sqlpp11/date_functions/hour.h>
 #endif // SQLPP11_DATE_FUNCTIONS_H
