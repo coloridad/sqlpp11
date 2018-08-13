@@ -266,7 +266,8 @@ types = {
     'integer unsigned': 'integer_unsigned', #MYSQL
     'int unsigned': 'integer_unsigned', #MYSQL
     'bigint unsigned': 'bigint_unsigned',  #MYSQL
-    'point': 'geopoint' #MYSQL
+    'point': 'geopoint', #MYSQL
+    'set' : 'integer'
     }
 
 if failOnParse:
