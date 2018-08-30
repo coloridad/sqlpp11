@@ -258,7 +258,7 @@ types = {
     'timestamp with time zone': 'time_point', # PostgreSQL
     'timestamptz': 'time_point', # PostgreSQL
     'enum': 'text',  # MYSQL
-    'set': 'integer',  # MYSQL,
+    'set': 'text',  # MYSQL,
     'json' : 'text', # PostgreSQL
     'jsonb' : 'text', # PostgreSQL
     'tinyint unsigned': 'tinyint_unsigned', #MYSQL
