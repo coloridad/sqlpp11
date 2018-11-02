@@ -25,6 +25,7 @@
  */
 #ifndef SQLPP11_DATE_FUNCTIONS_H
 #define SQLPP11_DATE_FUNCTIONS_H
+#include <sqlpp11/date_functions/current_timestamp.h>
 #include <sqlpp11/date_functions/day.h>
 #include <sqlpp11/date_functions/dayofweek.h>
 #include <sqlpp11/date_functions/week.h>

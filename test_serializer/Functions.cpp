@@ -42,5 +42,8 @@ int Functions(int, char*[])
   compare(__LINE__, sqlpp::select(sqlpp::left(tab.delta, 8).as(delta_left)).from(tab).unconditionally(),
           "SELECT LEFT(tab_foo.delta, 8) AS delta_left FROM tab_foo");
 
+  const auto tab_time = test::TabDateTime{};
+  compare(__LINE__, sqlpp::insert_into(tab_time).set(tab_time.colTimePoint = sqlpp::current_timestamp(6u)),
+          "INSERT INTO tab_time_point (col_time_point) VALUES(CURRENT_TIMESTAMP(6))");
   return 0;
 }
